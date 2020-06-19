@@ -1,0 +1,24 @@
+{
+  "name": "fastify-tokenize",
+  "version": "1.0.0",
+  "description": "A fastify plugin to add Tokenize support through a decorator",
+  "main": "index.js",
+  "repository": "https://github.com/Bowser65/fastify-tokenize",
+  "author": "Bowser65 <bowoser@weeb.services>",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "lint": "eslint --ext js --ext jsx src"
+  },
+  "dependencies": {
+    "fastify-plugin": "^1.6.1",
+    "node-tokenize": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}
