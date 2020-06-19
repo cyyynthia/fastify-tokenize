@@ -41,6 +41,7 @@ function fastifyTokenize (fastify, options, next) {
 
   const tokenize = new Tokenize(options.secret)
   fastify.decorate('tokenize', tokenize)
+  next()
 }
 
 module.exports = fp(fastifyTokenize, { fastify: '>=1.0.0', name: 'fastify-tokenize' })
