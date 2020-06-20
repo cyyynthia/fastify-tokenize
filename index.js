@@ -34,6 +34,11 @@ function fastifyTokenize (fastify, options, next) {
     return
   }
 
+  if (typeof options.secret !== 'string') {
+    next(new Error('`secret` parameter must be a string'))
+    return
+  }
+
   if (fastify.tokenize) {
     next(new Error('fastify-tokenize has already registered'))
     return
@@ -41,7 +46,69 @@ function fastifyTokenize (fastify, options, next) {
 
   const tokenize = new Tokenize(options.secret)
   fastify.decorate('tokenize', tokenize)
+
+  if (options.fastifyAuth) {
+    if (!options.fetchAccount) {
+      next(new Error('`fetchAccount` parameter is mandatory when using fastify-auth compatibility'))
+      return
+    }
+
+    if (typeof options.fetchAccount !== 'function') {
+      next(new Error('`fetchAccount` parameter must be a function'))
+      return
+    }
+
+    let cookie = 'token'
+    let header = null
+    if (typeof options.cookie !== 'undefined') {
+      if (options.cookie !== false && (typeof options.cookie !== 'string' || !Boolean(options.cookie))) {
+        next(new Error('`cookie` parameter must be either a string or false.'))
+        return
+      }
+      cookie = options.cookie
+    }
+    if (typeof options.header !== 'undefined') {
+      if (options.header !== false && options.header !== null && (typeof options.header !== 'string' || !Boolean(options.header))) {
+        next(new Error('`header` parameter must be either a string, null or false.'))
+        return
+      }
+      header = options.header
+    }
+    if (![ 'undefined', 'boolean' ].includes(typeof options.cookieSigned)) {
+      next(new Error('`cookieSigned` parameter must be either a boolean.'))
+      return
+    }
+
+    fastify.decorate('verifyTokenizeToken', async function (request, reply) {
+      let token
+      delete request.user // Remove any previous data held here
+      if (cookie !== false && request.cookies) { // Try to find cookie
+        token = request.cookies[cookie]
+        if (token && options.cookieSigned) {
+          token = reply.unsignCookie(token)
+        }
+      }
+      if (!token && header !== false) { // Try to find header
+        token = request.headers.authorization
+        if (token && header !== null) {
+          const splitted = token.split(' ')
+          token = splitted.length !== 2 || splitted[0] !== header ? null : splitted[1]
+        }
+      }
+
+      if (!token) {
+        throw new Error('No authentication token found')
+      }
+
+      // Validate token
+      const user = await this.tokenize.validate(token, options.fetchAccount.bind(this))
+      if (!user) {
+        throw new Error('Invalid token')
+      }
+      request.user = user
+    })
+  }
   next()
 }
 
-module.exports = fp(fastifyTokenize, { fastify: '>=1.0.0', name: 'fastify-tokenize' })
+module.exports = fp(fastifyTokenize, { fastify: '>= 1', name: 'fastify-tokenize' })
