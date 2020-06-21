@@ -99,11 +99,13 @@ function fastifyTokenize (fastify, options, next) {
       if (!token) {
         throw new Error('No authentication token found')
       }
-
       // Validate token
       const user = await this.tokenize.validate(token, options.fetchAccount.bind(this))
-      if (!user) {
+      if (user === false) {
         throw new Error('Invalid token')
+      }
+      if (user === null) {
+        throw new Error('User not found')
       }
       request.user = user
     })
