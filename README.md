@@ -8,6 +8,9 @@ instance of Tokenize on every part of your server.
 Also includes compatibility for the [fastify-auth](https://github.com/fastify/fastify-auth) plugin for enhanced
 experience and flexibility in your Fastify server.
 
+Tokenize leverages the pain of generating secure tokens and makes it easy to issue and validate tokens in your
+application.
+
 ## Install
 ```
 With PNPM:
@@ -63,9 +66,9 @@ fastify.route({
 })
 ```
 
-By default, fastify-tokenize checks for either the `token` cookie (will only work if
+By default, fastify-tokenize checks for either the `token` cookie without performing signature checks (will only work if
 [fastify-cookie](https://github.com/fastify/fastify-cookie)) is registered, or a token passed in the `authorization`
-header. You can obviously customize this for yourself through the `cookie` and `header` options.
+header. You can obviously customize this for yourself through the following options:
 
  - Setting `cookie` to false will disable authentication through cookies. Same thing for `header`
  - Setting `cookie` to any string will tell fastify-tokenize to check for this cookie when attempting to authenticate a
@@ -74,7 +77,3 @@ request
  - Setting `header` to `null` (default) will attempt to look for a naked token
  - Setting `header` to any string will tell fastify-tokenize to only look for specific authorization types
 Example: if you set `header` to `User`, it'll look for `authorization: User <token>`
-
-## TODO
- - Unit tests
- - TypeScript stuff

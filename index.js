@@ -61,21 +61,31 @@ function fastifyTokenize (fastify, options, next) {
     let cookie = 'token'
     let header = null
     if (typeof options.cookie !== 'undefined') {
-      if (options.cookie !== false && (typeof options.cookie !== 'string' || !Boolean(options.cookie))) {
+      if (options.cookie !== false && (typeof options.cookie !== 'string' || !options.cookie)) {
         next(new Error('`cookie` parameter must be either a string or false.'))
         return
       }
+
+      // eslint-disable-next-line prefer-destructuring
       cookie = options.cookie
     }
     if (typeof options.header !== 'undefined') {
-      if (options.header !== false && options.header !== null && (typeof options.header !== 'string' || !Boolean(options.header))) {
+      if (options.header !== false && options.header !== null && (typeof options.header !== 'string' || !options.header)) {
         next(new Error('`header` parameter must be either a string, null or false.'))
         return
       }
+
+      // eslint-disable-next-line prefer-destructuring
       header = options.header
     }
+
+    if (cookie === false && header === false) {
+      next(new Error('You can\'t disable both cookies and headers!'))
+      return
+    }
+
     if (![ 'undefined', 'boolean' ].includes(typeof options.cookieSigned)) {
-      next(new Error('`cookieSigned` parameter must be either a boolean.'))
+      next(new Error('`cookieSigned` parameter must be a boolean.'))
       return
     }
 
