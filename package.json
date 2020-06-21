@@ -7,7 +7,7 @@
   "author": "Bowser65 <bowoser@weeb.services>",
   "license": "BSD-3-Clause",
   "scripts": {
-    "lint": "eslint --ext js --ext jsx src",
+    "lint": "eslint --ext js --ext jsx .",
     "test": "jest test.js"
   },
   "dependencies": {
