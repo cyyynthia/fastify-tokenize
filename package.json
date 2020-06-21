@@ -1,6 +1,6 @@
 {
   "name": "fastify-tokenize",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A fastify plugin to add Tokenize support through a decorator",
   "main": "index.js",
   "repository": "https://github.com/Bowser65/fastify-tokenize",
