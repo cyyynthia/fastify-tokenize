@@ -9,7 +9,7 @@ instance of Tokenize on every part of your server.
 Also includes compatibility for the [fastify-auth](https://github.com/fastify/fastify-auth) plugin for enhanced
 experience and flexibility in your Fastify server.
 
-Tokenize leverages the pain of generating secure tokens and makes it easy to issue and validate tokens in your
+Tokenize removes the pain of generating secure tokens and makes it easy to issue and validate tokens in your
 application.
 
 ## Install
