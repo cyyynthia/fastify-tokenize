@@ -123,4 +123,4 @@ function fastifyTokenize (fastify, options, next) {
   next()
 }
 
-module.exports = fp(fastifyTokenize, { fastify: '>= 1', name: 'fastify-tokenize' })
+module.exports = fp(fastifyTokenize, { fastify: '>= 3', name: 'fastify-tokenize' })
