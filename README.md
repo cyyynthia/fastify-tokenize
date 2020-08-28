@@ -1,6 +1,6 @@
 # fastify-tokenize
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G71TSDF)<br>
-[![License](https://img.shields.io/github/license/Bowser65/fastify-tokenize.svg?style=flat-square)](https://github.com/Bowser65/fastify-tokenize/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/Bowser65/fastify-tokenize.svg?style=flat-square)](https://github.com/Bowser65/fastify-tokenize/blob/mistress/LICENSE)
 ![CI](https://github.com/Bowser65/fastify-tokenize/workflows/ci/badge.svg)
 
 An extremely tiny plugin for Fastify for [node-tokenize](https://npm.im/node-tokenize). Allows you to share the same
