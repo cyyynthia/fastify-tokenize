@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Bowser65, All rights reserved.
+ * Copyright (c) 2020 Cynthia K. Rey, All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -28,7 +28,7 @@
 /* eslint-env jest */
 
 const Fastify = require('fastify')
-const Tokenize = require('node-tokenize')
+const Tokenize = require('@cyyynthia/tokenize')
 const fastifyTokenize = require('./index')
 let fastify
 
@@ -169,7 +169,7 @@ describe('fastify-tokenize', function () {
     })
 
     it('should go through if the token is valid', async function () {
-      register({ fastifyAuth: true, fetchAccount: () => ({ tokensValidSince: 0 }) })
+      register({ fastifyAuth: true, fetchAccount: () => ({ lastTokenReset: 0 }) })
       await fastify.ready()
 
       const forgedReq = { cookies: { token: fastify.tokenize.generate('meow') }, headers: {} }
@@ -178,7 +178,7 @@ describe('fastify-tokenize', function () {
 
     describe('cookies', function () {
       it('should target the right cookie', async function () {
-        register({ fastifyAuth: true, fetchAccount: () => ({ tokensValidSince: 0 }), cookie: 'rawr' })
+        register({ fastifyAuth: true, fetchAccount: () => ({ lastTokenReset: 0 }), cookie: 'rawr' })
         await fastify.ready()
 
         const forgedReq = { cookies: { rawr: fastify.tokenize.generate('meow') }, headers: {} }
@@ -196,7 +196,7 @@ describe('fastify-tokenize', function () {
 
       it('should attempt to unsign the token if `cookieSigned` is set to true', async function () {
         expect.assertions(1)
-        register({ fastifyAuth: true, fetchAccount: () => ({ tokensValidSince: 0 }), cookieSigned: true })
+        register({ fastifyAuth: true, fetchAccount: () => ({ lastTokenReset: 0 }), cookieSigned: true })
         await fastify.ready()
 
         const unsignCookie = jest.fn(t => t)
@@ -208,7 +208,7 @@ describe('fastify-tokenize', function () {
 
       it('should not attempt to unsign the token if `cookieSigned` isn\'t set to true', async function () {
         expect.assertions(1)
-        register({ fastifyAuth: true, fetchAccount: () => ({ tokensValidSince: 0 }) })
+        register({ fastifyAuth: true, fetchAccount: () => ({ lastTokenReset: 0 }) })
         await fastify.ready()
 
         const unsignCookie = jest.fn(t => t)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Bowser65, All rights reserved.
+ * Copyright (c) 2020 Cynthia K. Rey, All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,8 +25,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import Tokenize from 'node-tokenize'
-import { FastifyPlugin } from 'fastify'
+import Tokenize from '@cyyynthia/tokenize'
+import { FastifyPluginCallback } from 'fastify'
 
 declare namespace FastifyTokenize {
   interface Options {
@@ -50,5 +50,5 @@ declare module 'fastify' {
   }
 }
 
-declare const fastifyTokenize: FastifyPlugin<FastifyTokenize.Options | FastifyTokenize.OptionsAuth>
+declare const fastifyTokenize: FastifyPluginCallback<FastifyTokenize.Options | FastifyTokenize.OptionsAuth>
 export default fastifyTokenize

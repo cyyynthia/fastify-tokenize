@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/github/license/Bowser65/fastify-tokenize.svg?style=flat-square)](https://github.com/Bowser65/fastify-tokenize/blob/mistress/LICENSE)
 ![CI](https://github.com/Bowser65/fastify-tokenize/workflows/ci/badge.svg)
 
-An extremely tiny plugin for Fastify for [node-tokenize](https://npm.im/node-tokenize). Allows you to share the same
+An extremely tiny plugin for Fastify for [@cyyynthia/tokenize](https://npm.im/@cyyynthia/tokenize). Allows you to share the same
 instance of Tokenize on every part of your server.
 
 Also includes compatibility for the [fastify-auth](https://github.com/fastify/fastify-auth) plugin for enhanced
@@ -14,13 +14,8 @@ application.
 
 ## Install
 ```
-With PNPM:
 pnpm i fastify-tokenize
-
-With Yarn:
 yarn add fastify-tokenize
-
-With NPM:
 npm i fastify-tokenize
 ```
 
@@ -42,7 +37,8 @@ then be used within your app to greet users with their username or perform more 
 
 It is mandatory to provide a `fetchAccount` option when registering fastify-tokenize. This method will receive the
 account ID as unique argument and should the user account (or a promise resolving to a user account). The only
-required property is `tokensValidSince` which is used to invalidate tokens generated prior this date.
+required property is `lastTokenReset` (or `last_token_reset`) which is used to invalidate tokens generated prior
+this date.
 
 ```js
 // We'll assume we use mongodb as our database here.

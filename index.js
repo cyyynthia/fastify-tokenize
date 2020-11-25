@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Bowser65, All rights reserved.
+ * Copyright (c) 2020 Cynthia K. Rey, All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -25,8 +25,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+const Tokenize = require('@cyyynthia/tokenize')
 const fp = require('fastify-plugin')
-const Tokenize = require('node-tokenize')
 
 function fastifyTokenize (fastify, options, next) {
   if (!options.secret) {

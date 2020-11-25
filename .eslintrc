@@ -1,9 +1,6 @@
 {
   "extends": "standard",
-  "env": {
-    "browser": true,
-    "node": true
-  },
+  "env": { "node": true },
   "rules": {
     "no-void": "off",
     "no-undefined": "error",
