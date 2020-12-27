@@ -45,8 +45,12 @@ declare namespace FastifyTokenize {
 declare module 'fastify' {
   interface FastifyInstance {
     readonly tokenize: Tokenize
+    verifyTokenizeToken (request: FastifyRequest, reply: FastifyReply): Promise<void>
+  }
 
-    verifyTokenizeToken (request: FastifyRequest, reply: FastifyReply): Promise
+  interface FastifyRequest {
+    // todo: find a way to type this in a decent way
+    user?: unknown
   }
 }
 

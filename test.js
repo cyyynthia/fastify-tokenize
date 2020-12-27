@@ -199,7 +199,7 @@ describe('fastify-tokenize', function () {
         register({ fastifyAuth: true, fetchAccount: () => ({ lastTokenReset: 0 }), cookieSigned: true })
         await fastify.ready()
 
-        const unsignCookie = jest.fn(t => t)
+        const unsignCookie = jest.fn(t => ({ valid: true, value: t }))
         const forgedReq = { cookies: { token: fastify.tokenize.generate('meow') }, headers: {} }
         const forgedRes = { unsignCookie }
         await fastify.verifyTokenizeToken(forgedReq, forgedRes)
@@ -211,7 +211,7 @@ describe('fastify-tokenize', function () {
         register({ fastifyAuth: true, fetchAccount: () => ({ lastTokenReset: 0 }) })
         await fastify.ready()
 
-        const unsignCookie = jest.fn(t => t)
+        const unsignCookie = jest.fn(t => ({ valid: true, value: t }))
         const forgedReq = { cookies: { token: fastify.tokenize.generate('meow') }, headers: {} }
         const forgedRes = { unsignCookie }
         await fastify.verifyTokenizeToken(forgedReq, forgedRes)

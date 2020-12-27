@@ -46,6 +46,12 @@ function fastifyTokenize (fastify, options, next) {
 
   const tokenize = new Tokenize(options.secret)
   fastify.decorate('tokenize', tokenize)
+  fastify.decorateRequest('user', null)
+  fastify.addHook('onRequest', (req, _, done) => {
+    // Wipe user for every request
+    req.user = null
+    done()
+  })
 
   if (options.fastifyAuth) {
     if (!options.fetchAccount) {
@@ -91,11 +97,11 @@ function fastifyTokenize (fastify, options, next) {
 
     fastify.decorate('verifyTokenizeToken', async function (request, reply) {
       let token
-      delete request.user // Remove any previous data held here
       if (cookie !== false && request.cookies) { // Try to find cookie
         token = request.cookies[cookie]
         if (token && options.cookieSigned) {
-          token = reply.unsignCookie(token)
+          const tokenCookie = reply.unsignCookie(token)
+          token = tokenCookie.valid && tokenCookie.value
         }
       }
       if (!token && header !== false) { // Try to find header
@@ -120,6 +126,7 @@ function fastifyTokenize (fastify, options, next) {
       request.user = user
     })
   }
+
   next()
 }
 
