@@ -1,5 +1,5 @@
 dependencies:
-  '@cyyynthia/tokenize': 1.1.1
+  '@cyyynthia/tokenize': 1.1.2
   fastify-plugin: 3.0.0
 devDependencies:
   eslint: 7.16.0
@@ -299,10 +299,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-v9kIhKwjeZThiWrLmj0y17CWoyddASLj9O2yvbZkbvw/N3rWOYy9zkV66ursAoVr0mV15bL8g0c4QZUE6cdDoQ==
-  /@cyyynthia/tokenize/1.1.1:
+  /@cyyynthia/tokenize/1.1.2:
     dev: false
     resolution:
-      integrity: sha512-X4LTS10swLii1Hc4chNJUCH8cQ1UsFArmj8+xsGtLHNU+tScjWmj4XnUNnwwCRGT3Wh8EAOIYNcXAK0bPFEPMQ==
+      integrity: sha512-yCsppfAIkyy+eYjfTwabFqZbJaN5AgFs6r7LMeSfB5v0Omk3sXQPEJdTre+lpEqTcU+YhFq2/iZGYDc+jDx41g==
   /@eslint/eslintrc/0.2.2:
     dependencies:
       ajv: 6.12.6
@@ -4810,7 +4810,7 @@ packages:
     resolution:
       integrity: sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==
 specifiers:
-  '@cyyynthia/tokenize': ^1.1.1
+  '@cyyynthia/tokenize': ^1.1.2
   eslint: ^7.16.0
   eslint-config-standard: ^16.0.2
   eslint-plugin-import: ^2.22.1

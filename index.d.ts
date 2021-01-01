@@ -25,8 +25,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import Tokenize from '@cyyynthia/tokenize'
-import { FastifyPluginCallback } from 'fastify'
+import type { default as Tokenize, AccountFetcher, AsyncAccountFetcher } from '@cyyynthia/tokenize'
+import type { FastifyPluginCallback, FastifyReply } from 'fastify'
+import type { RouteGenericInterface } from 'fastify/types/route'
 
 declare namespace FastifyTokenize {
   interface Options {
@@ -35,7 +36,7 @@ declare namespace FastifyTokenize {
 
   interface OptionsAuth extends Options {
     fastifyAuth: true,
-    fetchAccount: Tokenize.AccountFetcher | Tokenize.AsyncAccountFetcher,
+    fetchAccount: AccountFetcher | AsyncAccountFetcher,
     cookie?: string | false,
     header?: string | null | false
     cookieSigned?: boolean
@@ -43,14 +44,17 @@ declare namespace FastifyTokenize {
 }
 
 declare module 'fastify' {
+  interface RequestGenericInterface {
+    TokenizeUser?: unknown
+  }
+
+  interface FastifyRequest<RouteGeneric extends RouteGenericInterface = RouteGenericInterface> {
+    user?: RouteGeneric['TokenizeUser'] | null
+  }
+
   interface FastifyInstance {
     readonly tokenize: Tokenize
     verifyTokenizeToken (request: FastifyRequest, reply: FastifyReply): Promise<void>
-  }
-
-  interface FastifyRequest {
-    // todo: find a way to type this in a decent way
-    user?: unknown
   }
 }
 

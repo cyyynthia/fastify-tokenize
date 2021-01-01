@@ -1,6 +1,6 @@
 {
   "name": "fastify-tokenize",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A fastify plugin to add Tokenize support through a decorator.",
   "main": "index.js",
   "repository": "https://github.com/cyyynthia/fastify-tokenize",
@@ -11,7 +11,7 @@
     "test": "jest test.js"
   },
   "dependencies": {
-    "@cyyynthia/tokenize": "^1.1.1",
+    "@cyyynthia/tokenize": "^1.1.2",
     "fastify-plugin": "^3.0.0"
   },
   "devDependencies": {
