@@ -74,3 +74,16 @@ request
  - Setting `header` to `null` (default) will attempt to look for a naked token
  - Setting `header` to any string will tell fastify-tokenize to only look for specific authorization types
 Example: if you set `header` to `User`, it'll look for `authorization: User <token>`
+
+## Usage with TypeScript
+You can type the `request.user` field just like Fastify lets you type the querystring and various other request metadata:
+```ts
+import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
+import type { User } from './models'
+
+async function process (request: FastifyRequest<{ TokenizeUser: User }>, reply: FastifyReply) {
+  if ('user' in request && request.user) {
+    // typeof request.user is User
+  }
+}
+```
